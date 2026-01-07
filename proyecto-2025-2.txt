@@ -1,0 +1,124 @@
+
+1
+
+UNIVERSIDAD NACIONAL DE SAN ANTONIO ABAD DEL CUSCO
+DEPARTAMENTO ACADÉMICO DE INGENIERÍA INFORMÁTICA
+
+SEMESTRE 2025-2
+
+ASIGNATURA: MODELADO Y SIMULACIÓN
+PROYECTOS 2025-2
+
+1. MONTE CARLO: Estimar área territorial con Monte Carlo
+Estimar el área de un territorio (país, continente, región, departamento, provincia y estado) mediante
+muestreo de Monte Carlo.
+
+ENTREGABLES
+En cada unidad formativa, el equipo de trabajo deberá presentar un informe que contenga la siguiente
+información:
+PRIMERA UNIDAD
+Definición del sistema
+• Descripción del sistema: explicar la problemática que se busca resolver.
+• Restricciones del sistema: detallar las limitaciones técnicas, operativas o de contexto.
+• Variables del sistema: identificar y enumerar las variables relevantes.
+• Objetivo(s): definir los objetivos que se pretende alcanzar.
+Antecedentes
+• Realizar la lectura de al menos 10 artículos de investigación relacionados con el problema.
+• Elaborar un resumen por cada artículo (máximo ½ página) que incluya:
+o Problema de estudio
+o Objetivos planteados
+o Técnica(s) utilizada(s)
+o Resultados obtenidos
+o Conclusiones relevantes
+SEGUNDA UNIDAD
+Formulación del modelo
+• Identificación de variables:
+o Listar y codificar todas las variables.
+o Describir el significado y rol de cada variable.
+• Diseño del diagrama de flujo: representar gráficamente el funcionamiento del sistema utilizando
+las variables identificadas.
+Recolección de datos
+• Recopilar datos correspondientes a cada variable.
+• Para las variables aleatorias, determinar su distribución de frecuencias.
+TERCERA UNIDAD
+Construcción, validación y experimentación del modelo
+• Construcción del modelo:
+o Implementar el diagrama de flujo lógico, evidenciar con flujograma capturado de la
+aplicación.
+• Validación del modelo:
+o Verificar la concordancia entre el modelo y el sistema real.
+• Experimentación:
+o En problemas de optimización, identificar la combinación de parámetros que genere los
+mejores resultados.
+• Interpretación de resultados:
+o Analizar los resultados arrojados por la simulación.
+o Evaluar si el modelo es útil y adecuado para resolver el problema planteado.
+
+
+
+CALIFICACIÓN DEL PROYECTO
+
+La calificación del proyecto se realizará mediante una exposición y defensa, utilizando la lista de
+cotejo que se detalla a continuación. El docente designará al estudiante responsable de presentar y
+sustentar los ítems correspondientes a evaluar.
+LISTA DE COTEJO – PRIMERA UNIDAD: Definición del sistema
+Ítem a evaluar Descripción del criterio Puntaje
+máximo
+
+Descripción del sistema
+(problemática) Explica claramente la problemática, el contexto y su relevancia. 4
+Restricciones del sistema Identifica adecuadamente las limitaciones técnicas, operativas y/o
+contextuales. 2
+Identificación de variables Lista de forma precisa las variables clave del sistema. 3
+Objetivos del sistema Define objetivos claros, medibles y alineados al problema. 3
+Revisión de antecedentes Selección de al menos 10 artículos relevantes y actualizados. 4
+Resúmenes de artículos Resúmenes claros y concisos (máx. 1⁄2 página) con: problema,
+
+objetivos, técnicas, resultados y conclusiones. 4
+TOTAL 20
+
+LISTA DE COTEJO – SEGUNDA UNIDAD: Formulación del modelo
+Ítem a evaluar Descripción del criterio Puntaje
+máximo
+
+Identificación y codificación de
+variables
+
+Variables bien definidas y codificadas para su uso en el
+modelo. 4
+
+Descripción detallada de variables Explica de forma precisa el significado y función de
+
+cada variable. 3
+Diagrama de flujo Diagrama coherente, lógico y completo que refleja el
+sistema. 4
+
+Recolección de datos Evidencia de datos suficientes y confiables para cada
+variable. 5
+
+Distribución de frecuencias (variables
+aleatorias)
+
+Identificación y justificación correcta de las
+distribuciones de probabilidad. 4
+TOTAL 20
+
+LISTA DE COTEJO – TERCERA UNIDAD: 
+
+Construcción, validación y experimentación
+Ítem a evaluar Descripción del criterio Puntaje
+máximo
+
+Construcción del modelo Implementación completa y funcional del diagrama lógico. 5
+
+Validación del modelo Evidencia de concordancia entre el modelo y el sistema real. 5
+
+Experimentación Análisis y búsqueda sistemática de parámetros óptimos (cuando
+aplique). 4
+
+Interpretación de
+resultados Análisis profundo y coherente de los resultados de la simulación. 3
+Utilidad del modelo Evaluación crítica de la utilidad del modelo para resolver el
+problema. 3
+
+TOTAL 20
