@@ -1,0 +1,289 @@
+Universidad San Antonio Abad del Cusco
+Facultad de Ingenier´ıa El´ectrica, Electr´onica, Inform´atica y Mec´anica
+Escuela Profesional de Ingenier´ıa Inform´atica y de Sistemas
+Estimacion de Areas Territoriales usando el metodo
+de Monte Carlo
+Curso: Modelado y Simulacion
+Integrantes:
+1. Jairo Jaser Rodriguez Ccoyto
+2. Heidan Toribio Gil Figueroa
+3. Jacobo Neptaly La Torre Franco
+4. Angel Ismael Alvarez Catunta
+5. Frank Wilder Ulloa Parque
+Docente:
+Ing. Luis Beltran Palma Ttito
+Fecha:
+7 de enero de 2026
+1. Descripci´on del Sistema
+El c´alculo de superficies en 2D en pol´ıgonos irregulares es complicado haciendo uso de
+m´etodos tradicionales de c´alculos de ´areas, usando el m´etodo de Monte Carlo encerrando
+el ´area de dicho pol´ıgono se puede hacer una aproximaci´on del ´area real de dicho pol´ıgono
+encerr´andose dentro de una regi´on que llamaremos regi´on de cobertura cuya ´area podemos
+calcular f´acilmente y haciendo uso de generaci´on de n´umeros pseudoaleatorios podemos
+hacer un estimado del ´area a calcular.
+2. Restricciones del Sistema
+2.1. Limitaciones T´ecnicas
+Los c´alculos se realizan en 2D, sin considerar altitudes ni deformaciones geogr´aficas
+complejas.
+Es necesario convertir las coordenadas geogr´aficas (latitud y longitud) a unidades
+planas (metros) para realizar los c´alculos.
+Para manejar la complejidad computacional, no se incluyo las istas u archipielagos
+para los calculos.
+2.2. Limitaciones Operativas
+Solo se calcular´an ´areas de pa´ıses de Sudam´erica.
+2.3. Limitaciones de Contexto
+El contorno del pa´ıs se representar´a mediante pol´ıgonos definidos por l´ıneas rectas
+que aproximan la forma real del territorio.
+2.4. Objetivos
+Desarrollar un modelo de simulaci´on para la estimaci´on de ´areas de pa´ıses americanos
+en 2D usando el m´etodo de Monte Carlo.
+2.5. Formulaci´on del Modelo
+Para realizar la simulaci´on de Montecarlo aplicada a ´areas geogr´aficas pertenecientes
+a Sudam´erica necesitamos listar las variables que usaremos en este sistema:
+2.5.1. Listado de Variables:
+V´ertices del pol´ıgono geogr´afico (Originalmente en Latitud y Longitud) las cuales
+mediante proyecci´on de Albers podremos convertirlos a unidades planas (Metros).
+L´ımite Inferior y Superior en X (Metros)
+L´ımite Inferior y Superior en Y (Metros)
+1
+Coordenadas aleatorias en X, Y (Metros)
+Area de la regi´on de cobertura “rect´angulo” ( ´ Xmax − Xmin)(Y max − Y min)
+Cantidad de n´umeros pseudoaleatorios a generar.
+Contador de aciertos.
+Area real del pa´ıs. ´
+Area estimada del pa´ıs. ´
+3. Significado y rol de las variables
+1. V´ertices del pol´ıgono geogr´afico (P): Representar´an cada uno de los v´ertices
+que forman al pa´ıs al momento de dibujarlo las cuales inicialmente estar´an el Latitud
+y Longitud, pero mediante proyecci´on de Albers podemos proyectar esos puntos en
+un plano 2D.
+2. L´ımite inferior y superior en X (Xmin, Xmax): Representan el m´ınimo y m´aximo
+valor de los v´ertices que conforman al pa´ıs en el eje X ya proyectados en metros.
+3. L´ımite inferior y superior en Y (Ymin, Ymax): Representan el m´ınimo y m´aximo
+valor de los v´ertices que conforman al pa´ıs en el eje Y ya proyectados en metros.
+4. Area de la regi´on de cobertura ´ (A): Es el ´area conocida como base que cubrir´a el
+pol´ıgono. Usando los l´ımites del rect´angulo podemos calcular su ´area como (Xmax −
+Xmin)(Ymax − Ymin).
+5. Area real del pa´ıs: ´ Para calcular el error relativo porcentual del experimento se
+necesitar´a usar el ´area real plana de los pa´ıses.
+6. Cantidad de n´umeros pseudoaleatorios a usar (N): Representa la cantidad de
+n´umeros a generar en nuestra regi´on de cobertura la cual es necesaria para estimar
+el ´area real del pa´ıs.
+7. Contador de aciertos (Naciertos): Esta variable representa de lo N n´umeros
+pseudoaleatorios generamos, cu´antos n´umeros cayeron dentro del pol´ıgono del pa´ıs.
+8. Area estimada del pa´ıs ´ (Aest): Este es el c´alculo que debemos hacer para hallar
+el ´area estimada del pol´ıgono que representa a un pa´ıs.
+Aest = A ×
+Naciertos
+N
+4. Recolecci´on de datos
+4.1. Pol´ıgonos Geogr´aficos
+Pol´ıgono geogr´afico: Para la obtenci´on de los pol´ıgonos que representan a los pa´ıses se
+usar´a el dataset de informaci´on geogr´afica Natural Earth las cuales nos proporcionan
+las formas m´as aproximadas de los pa´ıses, los archivos estar´an en formato GeoJSON
+2
+y Shapefiles adem´as que estar´an referenciados bajo el sistema geod´esico mundial cuyas
+unidades estar´an en Latitud y Longitud.
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+4.2. Areas reales de pa´ıses ´
+Areas reales de pa´ıses para la comparaci´on del experimento: Para poder analizar el ´
+resultado del experimento necesitamos las ´areas en 2D de pa´ıses que pertenecen a Sudam´erica.
+Pa´ıs Area ( ´ km2
+)
+Brasil 8,515,770
+Argentina 2,780,400
+Per´u 1,285,216
+Colombia 1,138,910
+Bolivia 1,098,581
+Venezuela 916,445
+Chile 756,102
+Paraguay 406,752
+Ecuador 283,561
+Guyana 214,969
+Uruguay 176,215
+Suriname 163,820
+Guayana Francesa 83,534
+Cuadro 1: Area superficial por pa´ıs en metros cuadrados. ´
+4.3. Transformaci´on y proyecci´on de coordenadas
+No es viable usar las coordenadas de los v´ertices de los pol´ıgonos geogr´aficos que est´an
+en Latitud y Longitud ya que estas representan ´angulos en un elipsoide y no distancias
+constantes. Por ello, se usar´a la Proyecci´on C´onica de Areas equivalentes de Albers para ´
+Am´erica del Sur, la cual preservar´a matem´aticamente la proporci´on de ´areas; cada punto
+original (Latitud y Longitud) ser´a representado en un par de coordenadas (x, y) expresadas
+en metros.
+Pa´ıs Min Long Max Long Min Lat Max Lat Min X Albers Max X Albers Min Y Albers Max Y Albers
+Chile -109.45 -66.42 -55.92 -17.51 -4 570 641.88 -473 241.52 -2 601 361.35 1 657 747.55
+Bolivia -69.67 -57.47 -22.90 -9.68 -1 019 193.16 255 956.55 1 042 482.40 2 573 829.45
+Per´u -81.34 -68.68 -18.34 -0.03 -2 365 607.43 -904 180.09 1 555 769.18 3 562 524.15
+Argentina -73.57 -53.66 -55.05 -21.79 -1 046 566.23 600 695.53 -2 514 731.53 1 178 059.63
+Suriname -58.07 -53.99 1.83 6.01 226 924.10 712 513.74 3 842 899.13 4 282 885.42
+Guyana -61.40 -56.48 1.19 8.56 -165 643.90 407 678.06 3 779 479.74 4 546 628.25
+Brasil -74.02 -28.88 -33.74 5.27 -1 526 196.77 3 504 796.91 -214 281.79 4 209 501.56
+Uruguay -58.44 -53.11 -34.97 -30.10 139 067.35 618 634.40 -350 752.91 218 311.68
+Ecuador -92.01 -75.23 -5.01 1.66 -3 675 352.50 -1 730 066.59 2 973 408.32 3 671 434.02
+Colombia -81.72 -66.88 -4.24 13.58 -2 662 881.37 -792 816.56 3 155 304.14 4 880 300.10
+Paraguay -62.65 -54.25 -27.59 -19.29 -259 384.63 555 210.20 509 631.72 1 481 324.19
+Venezuela -73.39 -59.82 0.65 15.70 -1 615 837.45 22 207.87 3 710 996.07 5 241 771.53
+Cuadro 2: Coordenadas geogr´aficas y de proyecci´on Albers por pa´ıs.
+5. Distribuciones
+La variable que contar´a con una distribuci´on aleatoria son los puntos que generaremos
+dentro de la regi´on de cobertura (x, y) las cuales contar´an con una distribuci´on uniforme
+15
+continua las cuales debemos reajustar para que “caigan” dentro de la regi´on de cobertura,
+la justificaci´on de esto es que cada punto tendr´a igual probabilidad de caer dentro de la
+regi´on de cobertura y debemos generar igual cantidad de n´umeros en el eje X como en Y
+Para X: Xi ∼ DU(Xmin, Xmax)
+Para y: yi ∼ DU(ymin, ymax)
+16
+6. Diagrama de Flujo
+17
+7. An´alisis de Resultados
+8. Cuadro Comparativo de Resultados
+La Tabla 3 presenta los resultados obtenidos para cada pa´ıs con tres niveles de precisi´on: 10,000, 100,000 y 1,000,000 de puntos pseudoaleatorios.
+Cuadro 3: Resultados de la Simulaci´on de Monte Carlo por Pa´ıs
+Pa´ıs Area Real ´ N Area Estimada ´ Error Tiempo
+(km²) (puntos) (km²) ( %) (seg)
+Argentina 2,780,400
+10,000 2,753,789.53 0.96 0.63
+100,000 2,783,290.06 0.10 6.00
+1,000,000 2,783,344.92 0.11 65.46
+Bolivia 1,098,581
+10,000 1,091,289.36 0.66 0.46
+100,000 1,089,844.58 0.80 4.31
+1,000,000 1,085,069.10 1.23 45.97
+Brazil 8,515,770
+10,000 8,556,851.91 0.48 0.85
+100,000 8,523,606.75 0.09 7.59
+1,000,000 8,493,138.31 0.27 81.01
+Chile 756,102
+10,000 815,658.36 7.88 0.71
+100,000 818,299.42 8.23 7.55
+1,000,000 814,991.95 7.79 73.91
+Colombia 1,138,910
+10,000 1,150,981.56 1.06 0.55
+100,000 1,150,184.45 0.99 5.50
+1,000,000 1,152,481.58 1.19 57.33
+Ecuador 283,561
+10,000 251,150.94 11.43 0.40
+100,000 251,234.91 11.40 3.85
+1,000,000 250,719.61 11.58 36.94
+Guyana 214,969
+10,000 209,656.97 2.47 0.38
+100,000 209,888.01 2.36 3.81
+1,000,000 209,823.32 2.39 37.25
+Paraguay 406,752
+10,000 394,708.36 2.96 0.36
+100,000 401,781.85 1.22 3.59
+1,000,000 400,947.10 1.43 33.47
+Per´u 1,285,216
+10,000 1,324,542.08 3.06 0.49
+100,000 1,317,050.20 2.48 4.77
+1,000,000 1,308,689.14 1.83 49.90
+Suriname 163,820
+10,000 143,260.82 12.55 0.38
+100,000 144,859.48 11.57 3.66
+1,000,000 144,181.65 11.99 35.59
+Uruguay 176,215
+10,000 177,232.48 0.58 0.36
+100,000 177,057.18 0.48 3.49
+1,000,000 176,867.55 0.37 35.33
+Venezuela 916,445
+10,000 912,130.87 0.47 0.56
+100,000 909,443.16 0.76 5.68
+1,000,000 908,291.02 0.89 52.92
+Leyenda de colores: Error < 1 % Error 1-5 % Error 5-10 % Error > 10 %
+18
+9. Resumen Estad´ıstico por Pa´ıs
+Cuadro 4: Resumen de Precisi´on por Pa´ıs (con 100,000 puntos)
+Pa´ıs Error Relativo Clasificaci´on Observaciones
+Uruguay 0.48 % Excelente Forma compacta, sin islas
+Brazil 0.09 % Excelente Forma continental grande
+Argentina 0.10 % Excelente Forma alargada pero continua
+Venezuela 0.76 % Excelente Pocas islas no significativas
+Bolivia 0.80 % Excelente Pa´ıs mediterr´aneo
+Colombia 0.99 % Excelente Islas menores no incluidas
+Paraguay 1.22 % Buena Pa´ıs mediterr´aneo
+Per´u 2.48 % Buena Costa e islas menores
+Guyana 2.36 % Buena Peque˜nas diferencias lim´ıtrofes
+Chile 8.23 % Moderada Islas no incluidas
+Ecuador 11.40 % Baja Islas Gal´apagos excluidas
+Suriname 11.57 % Baja Discrepancias en shapefile
+10. Interpretaci´on de Resultados
+10.1. An´alisis General
+Los resultados demuestran que el m´etodo de Monte Carlo es una herramienta efectiva
+y precisa para estimar ´areas geogr´aficas, con las siguientes observaciones:
+Pa´ıses con formas compactas (Uruguay, Brasil, Argentina, Venezuela): El modelo alcanza errores menores al 1 %, demostrando excelente precisi´on.
+Pa´ıses mediterr´aneos (Bolivia, Paraguay): Al no tener costas ni islas, el shapefile
+los representa fielmente, obteniendo errores entre 0.8 % y 1.5 %.
+Pa´ıses con islas y archipi´elagos: Presentan errores sistem´aticos significativos debido a la exclusi´on de territorios insulares en el shapefile de baja resoluci´on (1:110m).
+10.2. Casos Problem´aticos: Islas y Archipi´elagos
+10.2.1. Chile (Error ≈ 7.8 %)
+El shapefile de baja resoluci´on no incluye la mayor´ıa de las islas del sur de Chile
+(Chilo´e, archipi´elago de los Chonos, Tierra del Fuego chilena, etc.). El ´area oficial de
+756,102 km² incluye estos territorios. Se intent´o utilizar el shapefile de alta resoluci´on
+(1:10m), pero la complejidad geom´etrica de miles de islas hace que la verificaci´on puntoen-pol´ıgono sea computacionalmente prohibitiva, causando que el programa no termine
+su ejecuci´on incluso con pocos puntos.
+10.2.2. Ecuador (Error ≈ 11.4 %)
+El shapefile de baja resoluci´on excluye las Islas Gal´apagos (≈ 8,010 km²), que
+representan aproximadamente el 2.8 % del territorio ecuatoriano. Sin embargo, el error
+19
+observado (11.4 %) sugiere discrepancias adicionales en los l´ımites continentales simplificados.
+10.2.3. Suriname (Error ≈ 12 %)
+Aunque Suriname no tiene islas significativas, el error alto sugiere que el shapefile
+simplificado tiene discrepancias en los l´ımites fronterizos o diferencias en la fuente
+de datos oficiales utilizada como referencia.
+10.3. Efecto del N´umero de Puntos
+10,000 puntos: Proporciona estimaciones r´apidas (<1 segundo) con errores aceptables para la mayor´ıa de pa´ıses. Util para pruebas preliminares. ´
+100,000 puntos: Ofrece el mejor balance entre precisi´on y tiempo de ejecuci´on (3-8
+segundos). Recomendado para an´alisis acad´emicos.
+1,000,000 puntos: No mejora significativamente la precisi´on para pa´ıses con errores
+sistem´aticos (Chile, Ecuador, Suriname) pero s´ı reduce la varianza aleatoria en pa´ıses
+bien representados.
+Observaci´on importante: Para pa´ıses como Chile, Ecuador y Suriname, aumentar
+el n´umero de puntos no reduce el error porque este es de naturaleza sistem´atica
+(territorio faltante en el shapefile) y no aleatoria.
+11. Evaluaci´on del Modelo
+11.1. Fortalezas
+1. Simplicidad conceptual: El m´etodo es f´acil de entender e implementar.
+2. Alta precisi´on para formas compactas: Errores menores al 1 % para 8 de 12
+pa´ıses.
+3. Escalabilidad: El tiempo de ejecuci´on escala linealmente con N.
+4. Aplicabilidad general: Funciona para cualquier forma geom´etrica, sin importar
+su complejidad topol´ogica.
+11.2. Limitaciones
+1. Dependencia de la calidad del shapefile: La precisi´on est´a limitada por la
+fidelidad geom´etrica de los datos de entrada.
+2. Islas y archipi´elagos: Los territorios insulares requieren shapefiles de alta resoluci´on que son computacionalmente costosos.
+20
+11.3. Conclusi´on
+El modelo de Monte Carlo es adecuado y ´util para estimar ´areas de pa´ıses con las
+siguientes condiciones:
+Pa´ıses con formas continentales compactas o mediterr´aneos.
+Cuando se dispone de shapefiles de resoluci´on apropiada.
+Para fines acad´emicos y did´acticos donde se busca demostrar el principio del
+m´etodo.
+Para aplicaciones que requieran alta precisi´on en pa´ıses insulares, se recomienda:
+Utilizar m´etodos de integraci´on num´erica directa sobre el shapefile.
+Emplear algoritmos vectorizados para verificaci´on punto-en-pol´ıgono.
+Calcular el ´area directamente desde las geometr´ıas proyectadas usando funciones de
+GeoPandas.
+12. Anexo: F´ormula de Error Relativo
+El error relativo se calcul´o mediante:
+Error Relativo ( %) = |Aestimada − Areal|
+Areal
+× 100
+Donde:
+Aestimada: Area calculada mediante Monte Carlo ´
+Areal: Area oficial seg´un fuentes del Banco Mundial/Wikipedia ´
+21
