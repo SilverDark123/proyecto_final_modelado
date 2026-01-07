@@ -25,7 +25,8 @@ def main():
     
     while True:
         mostrar_menu()
-        
+
+        # Paso 1        
         try:
             opcion = input("\n→ Ingrese el número del país (0 para salir): ").strip()
             
@@ -57,12 +58,15 @@ def main():
         # --- Visualización Previa (Lat/Long) ---
         visualizar_previa(pais_gdf, nombre_pais)
         
+        # Paso 2, 3 y 4
         # --- Proyectar y calcular bounding box ---
         pais_proyectado, bbox = proyectar_y_calcular_bbox(pais_gdf, nombre_pais)
         
+        # Paso 5
         # --- Solicitar cantidad de puntos ---
         n_puntos = solicitar_cantidad_puntos()
         
+        # Paso 6
         # --- Ejecutar simulación ---
         resultados = simulacion_montecarlo(pais_proyectado, bbox, n_puntos)
         
